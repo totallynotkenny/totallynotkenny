@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="360" viewBox="0 0 1000 360">
+  <defs>
+    <clipPath id="card">
+      <rect x="0.5" y="0.5" width="999" height="359" rx="14"/>
+    </clipPath>
+
+    <!-- portrait fades into the background towards the left -->
+    <linearGradient id="fadeX" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.55" stop-color="#fff" stop-opacity="1"/>
+    </linearGradient>
+    <mask id="portraitMask">
+      <rect x="540" y="0" width="460" height="360" fill="url(#fadeX)"/>
+    </mask>
+
+    <linearGradient id="fadeBottom" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0.6" stop-color="#0E1116" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0E1116" stop-opacity="0.85"/>
+    </linearGradient>
+
+    <radialGradient id="vignette" cx="0.5" cy="0.5" r="0.75">
+      <stop offset="0.6" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.45"/>
+    </radialGradient>
+
+    <!-- cold, slightly desaturated grade -->
+    <filter id="grade" color-interpolation-filters="sRGB">
+      <feColorMatrix type="saturate" values="0.55"/>
+      <feColorMatrix type="matrix" values="
+        0.92 0    0    0 0
+        0    0.96 0    0 0.01
+        0    0    1.04 0 0.03
+        0    0    0    1 0"/>
+    </filter>
+
+    <!-- film grain -->
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+
+    <style>
+      .serif { font-family: Georgia, 'Times New Roman', serif; }
+      .sans  { font-family: 'Segoe UI', 'Inter', Helvetica, Arial, sans-serif; }
+      .in { opacity: 0; animation: in 1.6s ease forwards; }
+      .d1 { animation-delay: .2s; } .d2 { animation-delay: .6s; }
+      .d3 { animation-delay: 1.1s; } .d4 { animation-delay: 1.5s; }
+      @keyframes in { to { opacity: 1; } }
+      .drift {
+        transform-box: view-box; transform-origin: 800px 180px;
+        animation: drift 24s ease-in-out infinite alternate;
+      }
+      @keyframes drift { from { transform: scale(1); } to { transform: scale(1.05); } }
+    </style>
+  </defs>
+
+  <g clip-path="url(#card)">
+    <rect width="1000" height="360" fill="#0E1116"/>
+
+    <g mask="url(#portraitMask)">
+      <g class="in d1">
+        <image class="drift" x="560" y="-40" width="440" height="440" preserveAspectRatio="xMidYMid slice" filter="url(#grade)" xlink:href="data:image/jpeg;base64,__SAE_BASE64__"/>
+      </g>
+    </g>
+
+    <rect width="1000" height="360" fill="url(#fadeBottom)"/>
+    <rect width="1000" height="360" fill="url(#vignette)"/>
+    <rect width="1000" height="360" filter="url(#grain)" opacity="0.06"/>
+  </g>
+
+  <rect x="0.5" y="0.5" width="999" height="359" rx="14" fill="none" stroke="#1E252E"/>
+
+  <!-- wordmark -->
+  <g class="in d1">
+    <text class="sans" x="60" y="68" font-size="13" font-weight="600" letter-spacing="7" fill="#E4E9EE">KENNY</text>
+    <line x1="150" y1="63.5" x2="196" y2="63.5" stroke="#2A323C"/>
+    <text class="sans" x="210" y="68" font-size="11" letter-spacing="3" fill="#5E6874">GAME DEVELOPER</text>
+  </g>
+
+  <!-- quote -->
+  <g class="in d2">
+    <text class="serif" x="58" y="160" font-size="34" font-style="italic" fill="#D9DFE6">__QUOTE_1__</text>
+    <text class="serif" x="58" y="204" font-size="34" font-style="italic" fill="#D9DFE6">__QUOTE_2__</text>
+  </g>
+
+  <g class="in d3">
+    <line x1="60" y1="240" x2="84" y2="240" stroke="#8FD8CE"/>
+    <text class="sans" x="96" y="244" font-size="11" letter-spacing="3.5" fill="#7C8896">SAE ITOSHI</text>
+  </g>
+
+  <!-- stack -->
+  <text class="sans in d4" x="60" y="308" font-size="11" letter-spacing="2.5" fill="#626C78">LUA   ·   NANOS WORLD   ·   GARRY'S MOD   ·   UNREAL ENGINE 5   ·   BLENDER</text>
+</svg>
